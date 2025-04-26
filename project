@@ -1,0 +1,171 @@
+package com.lms.dao;
+
+import java.sql.*;
+import java.util.*;
+import com.lms.model.Employ;
+import com.lms.model.LeaveDetails;
+import com.lms.validation.Validation;
+
+public class LmsDaoImpl implements LmsDao {
+
+    Connection con;
+    
+    public LmsDaoImpl() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/your_db_name", "your_username", "your_password");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Employ> showEmploy() {
+        List<Employ> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM employee";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Employ e = new Employ();
+                e.setEmpId(rs.getInt("empId"));
+                e.setEmpName(rs.getString("empName"));
+                e.setManagerId(rs.getInt("managerId"));
+                e.setLeaveBalance(rs.getInt("leaveBalance"));
+                list.add(e);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public Employ searchEmploy(int empId) {
+        Employ emp = null;
+        try {
+            String sql = "SELECT * FROM employee WHERE empId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, empId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                emp = new Employ();
+                emp.setEmpId(rs.getInt("empId"));
+                emp.setEmpName(rs.getString("empName"));
+                emp.setManagerId(rs.getInt("managerId"));
+                emp.setLeaveBalance(rs.getInt("leaveBalance"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return emp;
+    }
+
+    @Override
+    public String applyLeave(LeaveDetails leaveDetails) {
+        try {
+            Employ emp = searchEmploy(leaveDetails.getEmpId());
+            if (emp == null) {
+                return "Employee Not Found!";
+            }
+
+            String validationResult = Validation.validateLeave(emp, leaveDetails);
+            if (!validationResult.equals("SUCCESS")) {
+                return validationResult;
+            }
+
+            String sql = "INSERT INTO leave_history (empId, leaveStartDate, leaveEndDate, leaveType, leaveReason, leaveStatus, noOfDays) VALUES (?, ?, ?, ?, ?, 'PENDING', ?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, leaveDetails.getEmpId());
+            ps.setDate(2, leaveDetails.getLeaveStartDate());
+            ps.setDate(3, leaveDetails.getLeaveEndDate());
+            ps.setString(4, leaveDetails.getLeaveType());
+            ps.setString(5, leaveDetails.getLeaveReason());
+            ps.setInt(6, leaveDetails.getNoOfDays());
+            ps.executeUpdate();
+
+            // Reduce leave balance
+            String updateSql = "UPDATE employee SET leaveBalance = leaveBalance - ? WHERE empId = ?";
+            PreparedStatement ps1 = con.prepareStatement(updateSql);
+            ps1.setInt(1, leaveDetails.getNoOfDays());
+            ps1.setInt(2, leaveDetails.getEmpId());
+            ps1.executeUpdate();
+
+            return "Leave Applied Successfully and sent for Manager Approval.";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error while applying leave.";
+        }
+    }
+
+    @Override
+    public List<LeaveDetails> leaveHistory(int empId) {
+        List<LeaveDetails> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM leave_history WHERE empId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, empId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                LeaveDetails ld = new LeaveDetails();
+                ld.setLeaveId(rs.getInt("leaveId"));
+                ld.setEmpId(rs.getInt("empId"));
+                ld.setLeaveStartDate(rs.getDate("leaveStartDate"));
+                ld.setLeaveEndDate(rs.getDate("leaveEndDate"));
+                ld.setLeaveType(rs.getString("leaveType"));
+                ld.setLeaveReason(rs.getString("leaveReason"));
+                ld.setLeaveStatus(rs.getString("leaveStatus"));
+                ld.setNoOfDays(rs.getInt("noOfDays"));
+                ld.setManagerComments(rs.getString("managerComments"));
+                list.add(ld);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public List<LeaveDetails> pendingLeave(int managerId) {
+        List<LeaveDetails> list = new ArrayList<>();
+        try {
+            String sql = "SELECT lh.* FROM leave_history lh JOIN employee e ON lh.empId = e.empId WHERE e.managerId = ? AND lh.leaveStatus = 'PENDING'";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, managerId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                LeaveDetails ld = new LeaveDetails();
+                ld.setLeaveId(rs.getInt("leaveId"));
+                ld.setEmpId(rs.getInt("empId"));
+                ld.setLeaveStartDate(rs.getDate("leaveStartDate"));
+                ld.setLeaveEndDate(rs.getDate("leaveEndDate"));
+                ld.setLeaveType(rs.getString("leaveType"));
+                ld.setLeaveReason(rs.getString("leaveReason"));
+                ld.setLeaveStatus(rs.getString("leaveStatus"));
+                ld.setNoOfDays(rs.getInt("noOfDays"));
+                ld.setManagerComments(rs.getString("managerComments"));
+                list.add(ld);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public String approveOrRejectLeave(int leaveId, int managerId, String status, String managerComments) {
+        try {
+            String sql = "UPDATE leave_history SET leaveStatus = ?, managerComments = ? WHERE leaveId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, status.toUpperCase());
+            ps.setString(2, managerComments);
+            ps.setInt(3, leaveId);
+            ps.executeUpdate();
+            return "Leave " + status + " Successfully.";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error in approving/rejecting leave.";
+        }
+    }
+}
