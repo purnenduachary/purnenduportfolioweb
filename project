@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.*;
 import com.lms.model.Employ;
 import com.lms.model.LeaveDetails;
-import com.lms.validation.Validation;
 
 public class LmsDaoImpl implements LmsDao {
 
@@ -14,7 +13,10 @@ public class LmsDaoImpl implements LmsDao {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/your_db_name", "your_username", "your_password");
+                "jdbc:mysql://localhost:3306/yourdatabasename", 
+                "yourusername", 
+                "yourpassword"
+            );
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -22,39 +24,39 @@ public class LmsDaoImpl implements LmsDao {
 
     @Override
     public List<Employ> showEmploy() {
-        List<Employ> list = new ArrayList<>();
+        List<Employ> employList = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM employee";
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM employee");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Employ e = new Employ();
-                e.setEmpId(rs.getInt("empId"));
-                e.setEmpName(rs.getString("empName"));
-                e.setManagerId(rs.getInt("managerId"));
-                e.setLeaveBalance(rs.getInt("leaveBalance"));
-                list.add(e);
+                Employ emp = new Employ();
+                emp.setEmpId(rs.getInt("emp_id"));
+                emp.setEmpName(rs.getString("emp_name"));
+                emp.setEmpDept(rs.getString("emp_dept"));
+                emp.setEmpMgrId(rs.getString("emp_mgr_id"));
+                emp.setLeaveAvail(rs.getInt("leave_avail"));
+                employList.add(emp);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return list;
+        return employList;
     }
 
     @Override
     public Employ searchEmploy(int empId) {
         Employ emp = null;
         try {
-            String sql = "SELECT * FROM employee WHERE empId = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM employee WHERE emp_id = ?");
             ps.setInt(1, empId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 emp = new Employ();
-                emp.setEmpId(rs.getInt("empId"));
-                emp.setEmpName(rs.getString("empName"));
-                emp.setManagerId(rs.getInt("managerId"));
-                emp.setLeaveBalance(rs.getInt("leaveBalance"));
+                emp.setEmpId(rs.getInt("emp_id"));
+                emp.setEmpName(rs.getString("emp_name"));
+                emp.setEmpDept(rs.getString("emp_dept"));
+                emp.setEmpMgrId(rs.getString("emp_mgr_id"));
+                emp.setLeaveAvail(rs.getInt("leave_avail"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,39 +65,56 @@ public class LmsDaoImpl implements LmsDao {
     }
 
     @Override
-    public String applyLeave(LeaveDetails leaveDetails) {
+    public String applyLeave(LeaveDetails leave) {
         try {
-            Employ emp = searchEmploy(leaveDetails.getEmpId());
+            // Fetch Employ Details
+            Employ emp = searchEmploy(leave.getEmpId());
             if (emp == null) {
-                return "Employee Not Found!";
+                return "Employee not found!";
             }
 
-            String validationResult = Validation.validateLeave(emp, leaveDetails);
-            if (!validationResult.equals("SUCCESS")) {
-                return validationResult;
+            // Validations
+            Date today = new Date(System.currentTimeMillis());
+            if (leave.getLeaveStartDate().before(today) || leave.getLeaveEndDate().before(today)) {
+                return "Leave dates cannot be in the past!";
+            }
+            if (leave.getLeaveStartDate().after(leave.getLeaveEndDate())) {
+                return "Leave start date cannot be after end date!";
+            }
+            long diff = leave.getLeaveEndDate().getTime() - leave.getLeaveStartDate().getTime();
+            int noOfDays = (int) (diff / (1000 * 60 * 60 * 24)) + 1; // Including both start and end dates
+            if (noOfDays > emp.getLeaveAvail()) {
+                return "Not enough leave balance!";
             }
 
-            String sql = "INSERT INTO leave_history (empId, leaveStartDate, leaveEndDate, leaveType, leaveReason, leaveStatus, noOfDays) VALUES (?, ?, ?, ?, ?, 'PENDING', ?)";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, leaveDetails.getEmpId());
-            ps.setDate(2, leaveDetails.getLeaveStartDate());
-            ps.setDate(3, leaveDetails.getLeaveEndDate());
-            ps.setString(4, leaveDetails.getLeaveType());
-            ps.setString(5, leaveDetails.getLeaveReason());
-            ps.setInt(6, leaveDetails.getNoOfDays());
-            ps.executeUpdate();
+            // Insert Leave into leave_history table
+            PreparedStatement ps = con.prepareStatement(
+                "INSERT INTO leave_history (emp_id, leave_start_date, leave_end_date, leave_type, leave_reason, no_of_days, leave_status) VALUES (?, ?, ?, ?, ?, ?, 'PENDING')"
+            );
+            ps.setInt(1, leave.getEmpId());
+            ps.setDate(2, leave.getLeaveStartDate());
+            ps.setDate(3, leave.getLeaveEndDate());
+            ps.setString(4, leave.getLeaveType());
+            ps.setString(5, leave.getLeaveReason());
+            ps.setInt(6, noOfDays);
 
-            // Reduce leave balance
-            String updateSql = "UPDATE employee SET leaveBalance = leaveBalance - ? WHERE empId = ?";
-            PreparedStatement ps1 = con.prepareStatement(updateSql);
-            ps1.setInt(1, leaveDetails.getNoOfDays());
-            ps1.setInt(2, leaveDetails.getEmpId());
-            ps1.executeUpdate();
+            int res = ps.executeUpdate();
+            if (res == 1) {
+                // Update Leave Balance in employee table
+                PreparedStatement ps1 = con.prepareStatement(
+                    "UPDATE employee SET leave_avail = leave_avail - ? WHERE emp_id = ?"
+                );
+                ps1.setInt(1, noOfDays);
+                ps1.setInt(2, leave.getEmpId());
+                ps1.executeUpdate();
 
-            return "Leave Applied Successfully and sent for Manager Approval.";
+                return "Leave applied successfully!";
+            } else {
+                return "Error applying leave!";
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error while applying leave.";
+            return "Database Error!";
         }
     }
 
@@ -103,22 +122,21 @@ public class LmsDaoImpl implements LmsDao {
     public List<LeaveDetails> leaveHistory(int empId) {
         List<LeaveDetails> list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM leave_history WHERE empId = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM leave_history WHERE emp_id = ?");
             ps.setInt(1, empId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                LeaveDetails ld = new LeaveDetails();
-                ld.setLeaveId(rs.getInt("leaveId"));
-                ld.setEmpId(rs.getInt("empId"));
-                ld.setLeaveStartDate(rs.getDate("leaveStartDate"));
-                ld.setLeaveEndDate(rs.getDate("leaveEndDate"));
-                ld.setLeaveType(rs.getString("leaveType"));
-                ld.setLeaveReason(rs.getString("leaveReason"));
-                ld.setLeaveStatus(rs.getString("leaveStatus"));
-                ld.setNoOfDays(rs.getInt("noOfDays"));
-                ld.setManagerComments(rs.getString("managerComments"));
-                list.add(ld);
+                LeaveDetails leave = new LeaveDetails();
+                leave.setLeaveId(rs.getInt("leave_id"));
+                leave.setEmpId(rs.getInt("emp_id"));
+                leave.setLeaveStartDate(rs.getDate("leave_start_date"));
+                leave.setLeaveEndDate(rs.getDate("leave_end_date"));
+                leave.setLeaveType(rs.getString("leave_type"));
+                leave.setLeaveReason(rs.getString("leave_reason"));
+                leave.setNoOfDays(rs.getInt("no_of_days"));
+                leave.setLeaveStatus(rs.getString("leave_status"));
+                leave.setManagerComments(rs.getString("manager_comments"));
+                list.add(leave);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,25 +145,26 @@ public class LmsDaoImpl implements LmsDao {
     }
 
     @Override
-    public List<LeaveDetails> pendingLeave(int managerId) {
+    public List<LeaveDetails> pendingLeaveHistory(int managerId) {
         List<LeaveDetails> list = new ArrayList<>();
         try {
-            String sql = "SELECT lh.* FROM leave_history lh JOIN employee e ON lh.empId = e.empId WHERE e.managerId = ? AND lh.leaveStatus = 'PENDING'";
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(
+                "SELECT l.* FROM leave_history l JOIN employee e ON l.emp_id = e.emp_id WHERE e.emp_mgr_id = ? AND l.leave_status = 'PENDING'"
+            );
             ps.setInt(1, managerId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                LeaveDetails ld = new LeaveDetails();
-                ld.setLeaveId(rs.getInt("leaveId"));
-                ld.setEmpId(rs.getInt("empId"));
-                ld.setLeaveStartDate(rs.getDate("leaveStartDate"));
-                ld.setLeaveEndDate(rs.getDate("leaveEndDate"));
-                ld.setLeaveType(rs.getString("leaveType"));
-                ld.setLeaveReason(rs.getString("leaveReason"));
-                ld.setLeaveStatus(rs.getString("leaveStatus"));
-                ld.setNoOfDays(rs.getInt("noOfDays"));
-                ld.setManagerComments(rs.getString("managerComments"));
-                list.add(ld);
+                LeaveDetails leave = new LeaveDetails();
+                leave.setLeaveId(rs.getInt("leave_id"));
+                leave.setEmpId(rs.getInt("emp_id"));
+                leave.setLeaveStartDate(rs.getDate("leave_start_date"));
+                leave.setLeaveEndDate(rs.getDate("leave_end_date"));
+                leave.setLeaveType(rs.getString("leave_type"));
+                leave.setLeaveReason(rs.getString("leave_reason"));
+                leave.setNoOfDays(rs.getInt("no_of_days"));
+                leave.setLeaveStatus(rs.getString("leave_status"));
+                leave.setManagerComments(rs.getString("manager_comments"));
+                list.add(leave);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -154,19 +173,57 @@ public class LmsDaoImpl implements LmsDao {
     }
 
     @Override
-    public String approveOrRejectLeave(int leaveId, int managerId, String status, String managerComments) {
+    public String approveDeny(int leaveId, int managerId, String status, String managerComments) {
         try {
-            String sql = "UPDATE leave_history SET leaveStatus = ?, managerComments = ? WHERE leaveId = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, status.toUpperCase());
-            ps.setString(2, managerComments);
-            ps.setInt(3, leaveId);
-            ps.executeUpdate();
-            return "Leave " + status + " Successfully.";
+            // First, fetch leave details
+            PreparedStatement ps = con.prepareStatement(
+                "SELECT l.*, e.emp_mgr_id FROM leave_history l JOIN employee e ON l.emp_id = e.emp_id WHERE l.leave_id = ?"
+            );
+            ps.setInt(1, leaveId);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                return "Invalid Leave Id!";
+            }
+            int empMgrId = Integer.parseInt(rs.getString("emp_mgr_id"));
+            int noOfDays = rs.getInt("no_of_days");
+            int empId = rs.getInt("emp_id");
+
+            if (empMgrId != managerId) {
+                return "Unauthorized Manager!";
+            }
+
+            if (status.equalsIgnoreCase("YES")) {
+                // Approve
+                PreparedStatement ps1 = con.prepareStatement(
+                    "UPDATE leave_history SET leave_status = 'APPROVED', manager_comments = ? WHERE leave_id = ?"
+                );
+                ps1.setString(1, managerComments);
+                ps1.setInt(2, leaveId);
+                ps1.executeUpdate();
+                return "Leave Approved Successfully!";
+            } else {
+                // Deny
+                PreparedStatement ps1 = con.prepareStatement(
+                    "UPDATE leave_history SET leave_status = 'DENIED', manager_comments = ? WHERE leave_id = ?"
+                );
+                ps1.setString(1, managerComments);
+                ps1.setInt(2, leaveId);
+                ps1.executeUpdate();
+
+                // Add back the noOfDays to employee's leave balance
+                PreparedStatement ps2 = con.prepareStatement(
+                    "UPDATE employee SET leave_avail = leave_avail + ? WHERE emp_id = ?"
+                );
+                ps2.setInt(1, noOfDays);
+                ps2.setInt(2, empId);
+                ps2.executeUpdate();
+
+                return "Leave Denied and leave balance restored!";
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error in approving/rejecting leave.";
+            return "Database Error!";
         }
     }
 }
-https://chatgpt.com/share/680c7b19-c784-8011-addd-594b8df6d017
