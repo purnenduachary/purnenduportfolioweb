@@ -1,0 +1,54 @@
+1.Java Program to add two matrices
+
+2. Write a Java program to find all combinations of four elements of an array whose sum is equal to a given value.  
+
+i/p -  {10, 20, 30, 40, 1, 2}
+
+o/p-
+Given value: 53
+Combination of four elements:
+10 40 1 2
+20 30 1 2
+
+
+3.Java Program to Count Vowels and Consonants in a String
+
+i/p -Enter your string: Hello World
+
+o/p- 
+Number of vowels: 3
+Number of consonants: 7
+
+4.Java Program to Find the Fibonacci Series
+
+
+5.Java Program to Check the Equality of Two Arrays
+
+6.Java Program to Reverse Each Word of String
+
+i/p - Original string: Java 8 is great
+
+o/p - Reversed words: avaJ 8 si taerg
+
+7.Write a program in Java to find the sum of the given series:
+
+S = a2 + a2 / 2 + a2 / 3 + …… + a2 / 10
+
+8.Write a Java program to find the index of an array element.
+
+9.Write a Java program to find the number of even and odd integers in a given array of integers.
+
+10.Java program to find the duplicate characters in a string
+
+11.Factorial Program in Java
+
+12.Java Program to Find Square Root of a Number Without sqrt Method
+
+13.Java Convert Binary to Decimal
+
+14.Program to left rotate the elements of an array
+
+Original Array:
+1   2   3   4   5
+Array after left rotation:
+4   5   1   2   3
