@@ -1,0 +1,306 @@
+Which of the following method sets application/context init parameter?
+(1 Point)
+
+ 
+
+setParameter(String name,String value)
+
+Its not possible in the method
+
+setParameter(String name,Object value)
+
+setParameter(Object name,Object value)
+When destroy() method of servlet gets called?
+(1 Point)
+
+ 
+
+A - The destroy() method is called only once at the end of the life cycle of a servlet.
+
+B - The destroy() method is called after the servlet has executed service method.
+
+C - Both of the above.
+
+D - None of the above.
+Which of the following code retrieves the name of the HTTP Method?
+(1 Point)
+
+ 
+
+A - Header.getMethod()
+
+B - response.getMethod()
+
+C - request.getMethod()
+
+D - None of the above.
+RequestDispatcher object is used
+(1 Point)
+
+ 
+
+to include other resources
+
+to include an image
+
+to include xml object
+
+to include e-mailing response
+Which method shows the client what server is receiving?
+(1 Point)
+
+ 
+
+doGet
+
+doOption
+
+doTrace
+
+D. doPost
+Which of the following code can be used to send an error response to the client using the specified status code and error message?
+(1 Point)
+
+ 
+
+A - request.sendError(statusCode,message)
+
+B - response.sendError(statusCode,message)
+
+C - header.sendError(statusCode,message)
+
+D - None of the above.
+Which of the following are interface? 1. ServletContext 2. Servlet 3. GenericServlet 4. HttpServlet
+(1 Point)
+
+ 
+
+1,2,3,4
+
+1,2
+
+1,3,4
+
+1,4
+Which method is used to specify before any lines that uses the PintWriter?
+(1 Point)
+
+ 
+
+setPageType()
+
+setContextType()
+
+setContentType()
+
+setResponseType()
+What are Servlets?
+(1 Point)
+
+ 
+
+A - Java Servlets are programs that run on a Web or Application server.
+
+B - Java Servlets act as a middle layer between a request coming from a Web browser or other HTTP client and databases or applications on the HTTP server.
+
+C - Both of the above.
+
+D - None of the above.
+Which of the following code is used to get country/region code in servlets?
+(1 Point)
+
+ 
+
+A - request.getCountry()
+
+B - Locale.getCountry()
+
+C - response.getCountry()
+
+D - None of the above.
+What are the functions of Servlet container?
+(1 Point)
+
+ 
+
+Lifecycle management
+
+Communication support
+
+Multithreading support
+
+All of the above
+Which of the following code can be used to set the locale of the response?
+(1 Point)
+
+ 
+
+A - request.setLocale(locale)
+
+B - response.setLocale(locale)
+
+C - header.setLocale(locale)
+
+D - None of the above.
+How constructor can be used for a servlet?
+(1 Point)
+
+ 
+
+a) Initialization
+
+b) Constructor function
+
+c) Initialization and Constructor function
+
+d) Setup() method
+Which of the following is true about servlets?
+(1 Point)
+
+ 
+
+a) Servlets execute within the address space of web server
+
+b) Servlets are platform-independent because they are written in java
+
+c) Servlets can use the full functionality of the Java class libraries
+
+d) Servlets execute within the address space of web server, platform independent and uses the functionality of java class libraries
+Which of the following code is used to get names of the parameters in servlet?
+(1 Point)
+
+ 
+
+A - request.getParameterNames()
+
+B - response.getParameterNames()
+
+C - Header.getParameterNames()
+
+D - None of the above.
+Which of the following is true about servlets?
+(1 Point)
+
+ 
+
+Servlets execute within the address space of web server
+
+Servlets are platform-independent because they are written injava
+
+Servlets can use the full functionality of the Java class libraries
+
+Servlets execute within the address space of web server,platform independent and uses the functionality of java classlibraries
+Which are the session tracking techniques? 
+i. URL rewriting
+ ii. Using session object
+ iii.Using response object
+ iv. Using hidden fields
+ v. Using cookies
+ vi. Using servlet object
+(1 Point)
+
+ 
+
+a) i, ii, iii, vi
+
+b) i, ii, iv, v
+
+c) i, vi, iii, v
+
+d) i, ii, iii, v
+The life cycle of a servlet is managed by
+(1 Point)
+
+ 
+
+servlet context
+
+servlet container
+
+the supporting protocol (such as http or https)
+
+All of the above
+Which object of HttpSession can be used to view and manipulate information about a session?
+(1 Point)
+
+ 
+
+session identifier
+
+creation time
+
+last accessed time
+
+All mentioned above
+Which of the following request attributes that an error-handling servlet can access to analyse the nature of error/exception?
+(1 Point)
+
+ 
+
+A - javax.servlet.error.status_code
+
+B - javax.servlet.error.exception_type
+
+C - javax.servlet.error.message
+
+D - All of the above.
+Which of the following code is used to get an attribute in a HTTP Session object in servlets?
+(1 Point)
+
+ 
+
+session.getAttribute(String name)
+
+session.alterAttribute(String name)
+
+session.updateAttribute(String name)
+
+session.setAttribute(String name)
+Which of the following code returns the port number on which this request was received?
+(1 Point)
+
+ 
+
+A - response.getServerPort()
+
+B - request.getServerPort()
+
+C - Header.getServerPort()
+
+D - None of the above.
+Which method take a string not a URL?
+(1 Point)
+
+ 
+
+sendRedirect
+
+forward
+
+Both A & B
+
+None of the above
+Which methods are used to bind the objects on HttpSession instance and get the objects?
+(1 Point)
+
+ 
+
+setAttribute
+
+getAttribute
+
+Both A & B
+
+None of the above
+Which of the following code is used to get an attribute in a HTTP Session object in servlets?
+(1 Point)
+
+ 
+
+A - session.getAttribute(name)
+
+B - session.alterAttribute(name)
+
+C - session.updateAttribute(name)
+
+D - None of the above.
