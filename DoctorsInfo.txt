@@ -1,0 +1,102 @@
+package com.infinite.jsf.provider.model;
+ 
+ 
+import java.io.Serializable;
+ 
+public class Doctors implements Serializable {
+    private String doctorId;               // Primary key
+    private Providers provider;            // ✅ Fix: association to Provider entity
+    private String doctorName;
+    private String qualification;
+    private String specialization;
+    private String licenseNo;
+    private String email;
+    private String address;
+    
+    private DoctorType type;              // Enum
+    private DoctorStatus status;          // Enum
+    private DoctorsGender gender;         // Enum
+    
+ 
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+  <class name="com.infinite.jsf.provider.model.Doctors" table="doctors">
+ 
+    <!-- Primary Key -->
+    <id name="doctorId" column="doctor_id" type="string">
+      <generator class="assigned"/>
+    </id>
+ 
+    <!-- Many-to-One relationship with Providers -->
+    <many-to-one name="provider" class="com.infinite.jsf.provider.model.Providers" column="provider_id" not-null="true" fetch="join"/>
+ 
+    <!-- Basic Properties -->
+    <property name="doctorName" column="doctor_name" type="string" not-null="true"/>
+    <property name="qualification" column="qualification" type="string"/>
+    <property name="specialization" column="specialization" type="string"/>
+    <property name="licenseNo" column="license_no" type="string"/>
+    <property name="email" column="email" type="string"/>
+    <property name="address" column="address" type="string"/>
+ 
+    <!-- Enum: DoctorType -->
+    <property name="type" column="type">
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.infinite.jsf.provider.model.DoctorType</param>
+        <param name="type">12</param> <!-- 12 = VARCHAR -->
+      </type>
+    </property>
+ 
+    <!-- Enum: DoctorStatus -->
+    <property name="status" column="status">
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.infinite.jsf.provider.model.DoctorStatus</param>
+        <param name="type">12</param>
+      </type>
+    </property>
+ 
+    <!-- Enum: DoctorsGender -->
+    <property name="gender" column="gender">
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.infinite.jsf.provider.model.DoctorsGender</param>
+        <param name="type">12</param>
+      </type>
+    </property>
+ 
+  </class>
+</hibernate-mapping>
+ 
+ 
+Table bhi bhej de 
+ 
+CREATE TABLE Doctors (
+
+    doctor_id VARCHAR(20) PRIMARY KEY,
+
+    provider_id VARCHAR(20),
+
+    doctor_name VARCHAR(100) NOT NULL,
+
+    qualification VARCHAR(255),
+
+    specialization VARCHAR(100),
+
+    license_no VARCHAR(50) UNIQUE NOT NULL,
+
+    email VARCHAR(100) UNIQUE NOT NULL,
+
+    address VARCHAR(225) NOT NULL,
+
+    gender VARCHAR(10) NOT NULL,
+
+    type ENUM('STANDARD', 'ADHOC') DEFAULT 'STANDARD',
+
+    doctor_status ENUM('ACTIVE', 'INACTIVE') DEFAULT 'INACTIVE',
+
+    FOREIGN KEY (provider_id) REFERENCES Providers(provider_id)
+
+);
+ 
