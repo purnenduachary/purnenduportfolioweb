@@ -1,0 +1,220 @@
+"flagCode","country","phoneNumberLengthByCountry_phLengthMax","phoneNumberLengthByCountry_phLengthMin","phoneNumberLengthByCountry_phLength"
+"KP","North Korea",17,6,"6 to 17"
+"AU","Australia",15,5,"5 to 15"
+"JP","Japan",13,5,"5 to 13"
+"DE","Germany",13,6,"6 to 13"
+"SE","Sweden",13,7,"7 to 13"
+"AT","Austria",13,4,"4 to 13"
+"CN","China",12,5,"5 to 12"
+"CZ","Czech Republic",12,4,"4 to 12"
+"CH","Switzerland",12,4,"4 to 12"
+"RS","Serbia",12,4,"4 to 12"
+"SG","Singapore",12,8,"8 to 12"
+"FI","Finland",12,5,"5 to 12"
+"HR","Croatia",12,8,"8 to 12"
+"ME","Montenegro",12,4,"4 to 12"
+"PK","Pakistan",11,8,"8 to 11"
+"IT","Italy",11,,"up to 11"
+"KR","South Korea",11,8,"8 to 11"
+"PE","Peru",11,8,"8 to 11"
+"PG","Papua New Guinea",11,4,"4 to 11"
+"PT","Portugal",11,9,"9 or 11"
+"SV","El Salvador",11,7,"7, 8 or 11"
+"IE","Ireland",11,7,"7 to 11"
+"UY","Uruguay",11,4,"4 to 11"
+"CY","Cyprus",11,8,"8 or 11"
+"LU","Luxembourg",11,4,"4 to 11"
+"VA","Vatican City",11,,"up to 11"
+"IN","India",10,7,"7 to 10"
+"US","United States",10,10,10
+"ID","Indonesia",10,5,"5 to 10"
+"NG","Nigeria",10,7,"7 to 10"
+"BR","Brazil",10,10,10
+"BD","Bangladesh",10,6,"6 to 10"
+"RU","Russia",10,10,10
+"MX","Mexico",10,10,10
+"PH","Philippines",10,8,"8 to 10"
+"VN","Vietnam",10,7,"7 to 10"
+"IR","Iran",10,6,"6 to 10"
+"TR","Turkey",10,10,10
+"GB","United Kingdom",10,7,"7 to 10"
+"KE","Kenya",10,6,"6 to 10"
+"CO","Colombia",10,8,"8 or 10"
+"IQ","Iraq",10,8,"8 to 10"
+"AR","Argentina",10,10,10
+"CA","Canada",10,10,10
+"MG","Madagascar",10,9,"9 to 10"
+"VE","Venezuela",10,10,10
+"SY","Syria",10,8,"8 to 10"
+"KZ","Kazakhstan",10,10,10
+"ZW","Zimbabwe",10,5,"5 to 10"
+"DO","Dominican Republic",10,10,"(809/829) + 7"
+"GR","Greece",10,10,10
+"BY","Belarus",10,9,"9 to 10"
+"LA","Laos",10,8,"8 to 10"
+"NZ","New Zealand",10,3,"3 to 10"
+"PR","Puerto Rico",10,10,"(787/939) + 7"
+"NA","Namibia",10,6,"6 to 10"
+"JM","Jamaica",10,10,"(876) + 7"
+"TT","Trinidad and Tobago",10,10,"(868) + 7"
+"EE","Estonia",10,7,"7 to 10"
+"BS","Bahamas",10,10,"(242) + 7"
+"BB","Barbados",10,10,"(246) + 7"
+"LC","Saint Lucia",10,10,"(758) + 7"
+"GU","Guam",10,10,"(671) + 7"
+"GD","Grenada",10,10,"(473) + 7"
+"VC","Saint Vincent and the Grenadines",10,10,"(784) + 7"
+"AG","Antigua and Barbuda",10,10,"(268) + 7"
+"VI","United States Virgin Islands",10,10,"(340) + 7"
+"KY","Cayman Islands",10,10,"(345) + 7"
+"DM","Dominica",10,10,"(767) + 7"
+"BM","Bermuda",10,10,"(441) + 7"
+"KN","Saint Kitts and Nevis",10,10,"(869) + 7"
+"TC","Turks and Caicos Islands",10,10,"(649) + 7"
+"AS","American Samoa",10,10,"(684) + 7"
+"SX","Sint Maarten",10,10,"(721) + 7"
+"VG","British Virgin Islands",10,10,"(284) + 7"
+"SM","San Marino",10,6,"6 to 10"
+"AI","Anguilla",10,10,"(264) + 7"
+"MS","Montserrat",10,10,"(664) + 7"
+"ET","Ethiopia",9,9,9
+"EG","Egypt",9,7,"7 to 9"
+"CD","DR Congo",9,5,"5 to 9"
+"TH","Thailand",9,8,"8 or 9"
+"TZ","Tanzania",9,9,9
+"FR","France",9,9,9
+"ZA","South Africa",9,9,9
+"MM","Myanmar",9,7,"7 to 9"
+"SD","Sudan",9,9,9
+"UG","Uganda",9,9,9
+"ES","Spain",9,9,9
+"DZ","Algeria",9,8,"8 or 9"
+"AF","Afghanistan",9,9,9
+"YE","Yemen",9,6,"6 to 9"
+"AO","Angola",9,9,9
+"UA","Ukraine",9,9,9
+"MA","Morocco",9,9,9
+"PL","Poland",9,6,"6 to 9"
+"UZ","Uzbekistan",9,9,9
+"MY","Malaysia",9,7,"7 to 9"
+"MZ","Mozambique",9,8,"8 to 9"
+"GH","Ghana",9,5,"5 to 9"
+"SA","Saudi Arabia",9,8,"8 to 9"
+"NP","Nepal",9,8,"8 to 9"
+"LK","Sri Lanka",9,9,9
+"TW","Taiwan",9,8,"8 to 9"
+"ZM","Zambia",9,9,9
+"CL","Chile",9,8,"8 to 9"
+"SN","Senegal",9,9,9
+"RO","Romania",9,9,9
+"NL","Netherlands",9,9,9
+"RW","Rwanda",9,9,9
+"BE","Belgium",9,8,"8 to 9"
+"JO","Jordan",9,5,"5 to 9"
+"AE","United Arab Emirates",9,8,"8 to 9"
+"TJ","Tajikistan",9,9,9
+"AZ","Azerbaijan",9,8,"8 to 9"
+"HU","Hungary",9,8,"8 to 9"
+"IL","Israel",9,8,"8 to 9"
+"LY","Libya",9,8,"8 to 9"
+"HK","Hong Kong",9,4,"4, 8 to 9"
+"KG","Kyrgyzstan",9,9,9
+"PY","Paraguay",9,5,"5 to 9"
+"BG","Bulgaria",9,7,"7 to 9"
+"SK","Slovakia",9,4,"4 to 9"
+"GE","Georgia",9,9,9
+"AL","Albania",9,3,"3 to 9"
+"GQ","Equatorial Guinea",9,9,9
+"IS","Iceland",9,7,"7 or 9"
+"GP","Guadeloupe",9,9,9
+"MQ","Martinique",9,9,9
+"GF","French Guiana",9,9,9
+"AD","Andorra",9,6,"6, 8 or 9"
+"LI","Liechtenstein",9,7,"7 to 9"
+"MC","Monaco",9,5,"5 to 9"
+"CI","Ivory Coast",8,8,8
+"CM","Cameroon",8,8,8
+"NE","Niger",8,8,8
+"ML","Mali",8,8,8
+"BF","Burkina Faso",8,8,8
+"MW","Malawi",8,7,"7 or 8"
+"TD","Chad",8,8,8
+"SO","Somalia",8,5,"5 to 8"
+"GT","Guatemala",8,8,8
+"EC","Ecuador",8,8,8
+"KH","Cambodia",8,8,8
+"GN","Guinea",8,8,8
+"BJ","Benin",8,8,8
+"BI","Burundi",8,8,8
+"BO","Bolivia",8,8,8
+"TN","Tunisia",8,8,8
+"HT","Haiti",8,8,8
+"HN","Honduras",8,8,8
+"CU","Cuba",8,6,"6 to 8"
+"TG","Togo",8,8,8
+"SL","Sierra Leone",8,8,8
+"TM","Turkmenistan",8,8,8
+"NI","Nicaragua",8,8,8
+"DK","Denmark",8,8,8
+"LB","Lebanon",8,7,"7 to 8"
+"LR","Liberia",8,7,"7 to 8"
+"NO","Norway",8,5,"5 or 8"
+"CF","Central African Republic",8,8,8
+"OM","Oman",8,7,"7 to 8"
+"CR","Costa Rica",8,8,8
+"KW","Kuwait",8,7,"7 or 8"
+"PA","Panama",8,7,"7 or 8"
+"MN","Mongolia",8,7,"7 to 8"
+"BA","Bosnia and Herzegovina",8,8,8
+"QA","Qatar",8,3,"3 to 8"
+"MD","Moldova",8,8,8
+"AM","Armenia",8,8,8
+"LT","Lithuania",8,8,8
+"BW","Botswana",8,7,"7 to 8"
+"LS","Lesotho",8,8,8
+"SI","Slovenia",8,8,8
+"LV","Latvia",8,7,"7 or 8"
+"BH","Bahrain",8,8,8
+"SZ","Eswatini",8,7,"7 to 8"
+"BT","Bhutan",8,7,"7 to 8"
+"MO","Macau",8,7,"7 to 8"
+"MT","Malta",8,8,8
+"CW","Curacao",8,7,"7 to 8"
+"GI","Gibraltar",8,8,8
+"MR","Mauritania",7,7,7
+"ER","Eritrea",7,7,7
+"GM","Gambia",7,7,7
+"GA","Gabon",7,6,"6 or 7"
+"MU","Mauritius",7,7,7
+"FJ","Fiji",7,7,7
+"KM","Comoros",7,7,7
+"GY","Guyana",7,7,7
+"SR","Suriname",7,6,"6 to 7"
+"MV","Maldives",7,7,7
+"CV","Cape Verde",7,7,7
+"BN","Brunei",7,7,7
+"BZ","Belize",7,7,7
+"VU","Vanuatu",7,5,"5 or 7"
+"ST","Sao Tome and Principe",7,7,7
+"WS","Samoa",7,3,"3 to 7"
+"SC","Seychelles",7,7,7
+"FM","Micronesia",7,7,7
+"AW","Aruba",7,7,7
+"TO","Tonga",7,5,"5 or 7"
+"MH","Marshall Islands",7,7,7
+"PW","Palau",7,7,7
+"NR","Nauru",7,4,"4 or 7"
+"DJ","Djibouti",6,6,6
+"NC","New Caledonia",6,6,6
+"PF","French Polynesia",6,6,6
+"FO","Faroe Islands",6,6,6
+"GL","Greenland",6,6,6
+"WF","Wallis and Futuna",6,6,6
+"TV","Tuvalu",6,5,"5 or 6"
+"PM","Saint Pierre and Miquelon",6,6,6
+"SB","Solomon Islands",5,5,5
+"KI","Kiribati",5,5,5
+"CK","Cook Islands",5,5,5
+"FK","Falkland Islands",5,5,5
+"TK","Tokelau",4,4,4
+"NU","Niue",4,4,4
