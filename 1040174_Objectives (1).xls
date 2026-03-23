@@ -1,0 +1,45 @@
+<style> .textmode { mso-number-format:\@; } </style><div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Employee_Name</th><th scope="col">EmployeeID</th><th scope="col">KRA_Name</th><th scope="col">ManagerComment</th><th scope="col">ManagerRating</th><th scope="col">MeasurementCriteria</th><th scope="col">ObjectiveDescription</th><th scope="col">ReviewerComment</th><th scope="col">ReviewerRating</th><th scope="col">SelfComment</th><th scope="col">SelfRating</th><th scope="col">Weightage</th>
+		</tr><tr class="textmode">
+			<td>Purnendu Shekhar Achary</td><td>1040174</td><td>BEHAVIOURAL ATTRIBUTES</td><td>&nbsp;</td><td>0</td><td>Able to work with team members and coordinate well among</td><td>Team Player</td><td>&nbsp;</td><td>0</td><td>I am able to work effectively within a team and coordinate seamlessly with my team members. 
+I actively participate in team meetings and Scrum calls, contributing my views and ideas to discussions in a constructive manner. 
+I strictly follow the organizational hierarchy while communicating with the team regarding any issues, thereby ensuring professionalism, clarity, and smooth collaboration in all team interactions.</td><td>5</td><td>5</td>
+		</tr><tr class="textmode">
+			<td>Purnendu Shekhar Achary</td><td>1040174</td><td>ORGANIZATIONAL KRA</td><td>&nbsp;</td><td>0</td><td>Adherence to organization policies (Dress code, Leave policy, Hybrid Policy etc.), Follow Information security</td><td>Adherence to Company policies and values</td><td>&nbsp;</td><td>0</td><td>I consistently comply with organizational policies, including maintaining the prescribed dress code, following office timings, and upholding information security standards. 
+I ensure timely communication with my Reporting Manager before availing leaves and diligently submit leave requests on the BizX portal within the stipulated timelines.</td><td>5</td><td>5</td>
+		</tr><tr class="textmode">
+			<td>Purnendu Shekhar Achary</td><td>1040174</td><td>BEHAVIOURAL ATTRIBUTES</td><td>&nbsp;</td><td>0</td><td>Able to Present the Ideas effectively during Meetings and Project Presentation
+Document meetings with actionable tasks.</td><td>Presentation and Communication Skills</td><td>&nbsp;</td><td>0</td><td>I consistently present ideas in a clear, structured and impactful manner during my team meeting and project presentation review. 
+During the project review presentation, I effectively communication my module progress, key challenges, and proposed solutions in a structured and outcome-focused manner. 
+I focused aligning my communication with project objectives, breaking down complex technical concepts into actionable insights.</td><td>5</td><td>5</td>
+		</tr><tr class="textmode">
+			<td>Purnendu Shekhar Achary</td><td>1040174</td><td>FUNCTIONAL KRA</td><td>&nbsp;</td><td>0</td><td>Follow the Coding Standards and Best Practices
+understand the requirement and implement with Zero issues
+No build and Deployment failures</td><td>Quality of Deliverables (SLA Performance)</td><td>&nbsp;</td><td>0</td><td>I have strictly adhered to coding standards during my Demo Project review and successfully completed the assigned Healthcare project in alignment with best-practice Java guidelines, ensuring zero build issues. 
+While executing CMDS test cases, I followed the prescribed templates in the UIS document and applied best practices of the Functionize automation tool to record the assigned test cases effectively. 
+I prioritized fixing orchestration failures immediately and maintained the Clarification Tracker to document queries or clarifications required in test cases, while ensuring timely communication with my leads and mentors without any delays.</td><td>5</td><td>20</td>
+		</tr><tr class="textmode">
+			<td>Purnendu Shekhar Achary</td><td>1040174</td><td>FUNCTIONAL KRA</td><td>&nbsp;</td><td>0</td><td>Able to work without much hand holding
+Taking ownership of the task assigned
+Able to debug/analyse the issues assigned</td><td>Work Independently</td><td>&nbsp;</td><td>0</td><td>I have successfully completed all assigned tasks and test cases independently, requiring minimal handholding from my leads and mentors. 
+I consistently ensure that I finish my assignments on my own initiative, reaching out to leads and mentors only when necessary. 
+I am able to effectively analyze and debug the assigned test cases in CMDS, identify issues, and provide reliable solutions, demonstrating strong problem-solving skills and accountability in project execution.</td><td>5</td><td>25</td>
+		</tr><tr class="textmode">
+			<td>Purnendu Shekhar Achary</td><td>1040174</td><td>FUNCTIONAL KRA</td><td>&nbsp;</td><td>0</td><td>Process Compliance- Self / Team (Project guidelines, Time Sheets, Using standards &amp; Templates)</td><td>Process Compliance- Self / Team 
+(Tracking Tools, Time Sheets, Using standards &amp; Templates)</td><td>&nbsp;</td><td>0</td><td>I strictly follow process compliance by ensuring timely submission of all required tracking tools, including timesheets and the CMDS_Functionalize_SDLT tracker, without any delays.
+In addition, I consistently send my daily status mails without fail, demonstrating reliability, accountability, and adherence to organizational standards.</td><td>5</td><td>5</td>
+		</tr><tr class="textmode">
+			<td>Purnendu Shekhar Achary</td><td>1040174</td><td>FUNCTIONAL KRA</td><td>&nbsp;</td><td>0</td><td>Able to deliver task on time with required documentation. (For e.g. Technical Assignment, Project Presentation, Functional Learning.)    
+100% Attendance to training program
+Technical Assessment score should be more than 70%
+Demo Project Rating should be more than 3 (out of 5)</td><td>Schedule / Productivity - Adherence</td><td>&nbsp;</td><td>0</td><td>I successfully completed more than 100 test cases assigned in CMDS within the given timelines without any delays, all of which were approved by the client (Conduent) without any failures.
+In my project presentation, I comprehensively covered the functionalities assigned to me and presented them in a structured and professional manner before the leads, earning a strong rating in the Demo Project Presentation. 
+Furthermore, I attended the functional learning program with full attendance and achieved a good score in the technical assessment, reflecting my commitment to continuous learning, quality delivery, and professional excellence.</td><td>4</td><td>25</td>
+		</tr><tr class="textmode">
+			<td>Purnendu Shekhar Achary</td><td>1040174</td><td>SELF DEVELOPMENT </td><td>&nbsp;</td><td>0</td><td>Should complete Technical/ Functional learning and Assessment to meet the Project Expectation e.g. Portal, Blaze, JSF, Middleware, SQL/PLSQL, informatica, Cognos, Expression, dot net</td><td>MMIS Technologies / Domains learned</td><td>&nbsp;</td><td>0</td><td>I successfully completed the Technical Learning assessment provided by the organization and gained proficiency in multiple programming languages including Java, SQL, and JSF/JSP, while also exploring frameworks such as JDBC and EJB, and tools like Hibernate and Git, Github. 
+Through my work on CMDS test cases, I developed strong command over RDBMS concepts, particularly PostgreSQL, and enhanced my expertise in automation tools such as Functionize, thereby strengthening both my technical knowledge and practical application skills.</td><td>5</td><td>10</td>
+		</tr>
+	</table>
+</div>
